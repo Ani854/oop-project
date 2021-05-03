@@ -9,7 +9,11 @@ public class Return extends BaseDocument {
     }
 
     public void setExpiredDayCount(int expiredDayCount) {
-        this.expiredDayCount = expiredDayCount;
+        if (expiredDayCount <= 0) {
+            System.out.println("Expires day count can not be negative.");
+        } else {
+            this.expiredDayCount = expiredDayCount;
+        }
     }
 
     public String getVanAgent() {
@@ -17,6 +21,11 @@ public class Return extends BaseDocument {
     }
 
     public void setVanAgent(String vanAgent) {
-        this.vanAgent = vanAgent;
+        if (vanAgent.length() == 0) {
+            System.out.println("VanAgent name is empty");
+        } else {
+
+            this.vanAgent = vanAgent;
+        }
     }
 }

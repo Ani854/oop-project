@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 
 public class FileService {
@@ -24,7 +25,7 @@ public class FileService {
 
     public static void write(String path, String text) {
         try {
-            Files.write(Paths.get(path), text.getBytes());
+            Files.write(Paths.get(path), text.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
             e.printStackTrace();
         }

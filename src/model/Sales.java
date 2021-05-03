@@ -1,13 +1,17 @@
 package model;
 
 public class Sales extends BaseDocument {
-    private String vonAgentName;
+    private String vanAgentName;
 
-    public String getVonAgentName() {
-        return vonAgentName;
+    public String getVanAgentName() {
+        return vanAgentName;
     }
 
-    public void setVonAgentName(String vonAgentName) {
-        this.vonAgentName = vonAgentName;
+    public void setVanAgentName(String vanAgentName) {
+        if (vanAgentName.length() == 0) {
+            System.out.println("VanAgent name is empty.");
+        } else {
+            this.vanAgentName = vanAgentName;
+        }
     }
 }

@@ -4,10 +4,10 @@ import model.BaseDocument;
 
 import java.text.ParseException;
 
-public interface Functionalities {
+public interface SaleBaseFunctionalities {
     public BaseDocument create() throws ParseException;
 
-    public void validate(BaseDocument document) throws Exception;
+    public boolean validate(BaseDocument document) throws Exception;
 
     public String store(BaseDocument document) throws Exception;
 

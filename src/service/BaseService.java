@@ -33,12 +33,6 @@ public class BaseService {
         if (document.getCustomerName().length() == 0) {
             throw new NullPointerException("Customer name is empty");
         }
-        SimpleDateFormat format = new SimpleDateFormat();
-        format.applyPattern("dd.MM.yyyy");
-        Date validDate = format.parse("01.01.1900");
-        if (validDate.compareTo(document.getDate()) > 0) {
-            throw new Exception("Document date is smaller 01.01.1900");
-        }
         if (document.getProductName().length() == 0) {
             throw new NullPointerException("Product name is empty");
         }

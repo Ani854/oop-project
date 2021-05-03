@@ -9,10 +9,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class OrderService implements Functionalities {
+public class OrderService implements SaleBaseFunctionalities {
     @Override
     public Order create() throws ParseException {
-        System.out.println("Order document:");
+        System.out.println("Please insert order document:");
         Order order = new Order();
         order = (Order) BaseService.create(order);
 
@@ -33,24 +33,29 @@ public class OrderService implements Functionalities {
     }
 
     @Override
-    public void validate(BaseDocument document) throws Exception {
-        if (document instanceof Order) {
-            SimpleDateFormat format = new SimpleDateFormat();
-            format.applyPattern("dd.MM.yyyy");
-            Date validDate = format.parse("01.01.1900");
-            BaseService.validate(document);
-            if (((Order) document).getSalesAgentName().length() == 0) {
-                throw new NullPointerException("Sales agent  name is empty");
-            }
-            if (validDate.compareTo(((Order) document).getDeliveryDate()) > 0) {
-                throw new Exception("Delivery  date is smaller 01.01.1900");
-            }
+    public boolean validate(BaseDocument document) throws Exception {
+        if (!(document instanceof Order)) {
+            throw new Exception("This document is not an order document.");
         }
+        SimpleDateFormat format = new SimpleDateFormat();
+        format.applyPattern("dd.MM.yyyy");
+        Date validDate = format.parse("01.01.1900");
+        BaseService.validate(document);
+        if (((Order) document).getSalesAgentName().length() == 0) {
+            throw new NullPointerException("Sales agent  name is empty");
+        }
+        if (validDate.compareTo(((Order) document).getDeliveryDate()) > 0) {
+            throw new Exception("The date of the document is less than");
+        }
+        System.out.println("Everything is OK");
+        return true;
     }
 
     @Override
     public String store(BaseDocument document) throws Exception {
-        validate(document);
+        if (!validate(document)) {
+            throw new Exception("Document was not validated");
+        }
         Order order = (Order) document;
         String doc = order.getDate() + "," +
                 order.getCustomerName() + "," +
