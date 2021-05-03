@@ -42,7 +42,8 @@ public class Main {
                         System.out.println("1.Create document");
                         System.out.println("2.Check is document valid or not");
                         System.out.println("3.Save document in file");
-                        System.out.println("4.Back to general menu");
+                        System.out.println("4.Read order document with line");
+                        System.out.println("5.Back to general menu");
                         int a = scanner.nextInt();
                         switch (a) {
                             case 1:
@@ -56,6 +57,12 @@ public class Main {
                                 FileService.write("Documents\\order.txt", doc + "\n");
                                 break;
                             case 4:
+                                String[] strings = FileService.readLines("Documents\\order.txt");
+                                for (String string : strings) {
+                                    System.out.println(string);
+                                }
+                                break;
+                            case 5:
                                 active = false;
                                 break;
                             default:
@@ -70,7 +77,8 @@ public class Main {
                         System.out.println("1.Create document");
                         System.out.println("2.Check is document valid or not");
                         System.out.println("3.Save document in file");
-                        System.out.println("4.Back to general menu");
+                        System.out.println("4.Read order document with line");
+                        System.out.println("5.Back to general menu");
                         int a = scanner.nextInt();
                         switch (a) {
                             case 1:
@@ -84,6 +92,12 @@ public class Main {
                                 FileService.write("Documents\\return.txt", doc + "\n");
                                 break;
                             case 4:
+                                String[] strings = FileService.readLines("Documents\\return.txt");
+                                for (String string : strings) {
+                                    System.out.println(string);
+                                }
+                                break;
+                            case 5:
                                 active = false;
                                 break;
                             default:
@@ -97,7 +111,8 @@ public class Main {
                         System.out.println("1.Create document");
                         System.out.println("2.Check is document valid or not");
                         System.out.println("3.Save document in file");
-                        System.out.println("4.Back to general menu");
+                        System.out.println("4.Read order document with line");
+                        System.out.println("5.Back to general menu");
                         int a = scanner.nextInt();
                         switch (a) {
                             case 1:
@@ -110,6 +125,12 @@ public class Main {
                                 FileService.write("Documents\\sales.txt", doc + "\n");
                                 break;
                             case 4:
+                                String[] strings = FileService.readLines("Documents\\sales.txt");
+                                for (String string : strings) {
+                                    System.out.println(string);
+                                }
+                                break;
+                            case 5:
                                 active = false;
                                 break;
                             default:
