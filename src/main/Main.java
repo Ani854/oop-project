@@ -1,5 +1,8 @@
 package main;
 
+import convertor.OrderConvertor;
+import convertor.ReturnConvertor;
+import convertor.SalesConvertor;
 import model.Order;
 import model.Return;
 import model.Sales;
@@ -23,6 +26,13 @@ public class Main {
         FileService.createFile("Documents", "return.txt");
         FileService.createFile("Documents", "sales.txt");
 
+        String[] orderStrings = FileService.readLines("Documents\\order.txt");
+        Order[] orders = OrderConvertor.makeStringsToOrderDocument(orderStrings);
+        String[] returnStrings = FileService.readLines("Documents\\return.txt");
+        Return[] returns = ReturnConvertor.makeStringsToReturnDocument(returnStrings);
+        String[] salesStrings = FileService.readLines("Documents\\sales.txt");
+        Sales[] sales1 = SalesConvertor.makeStringsToSalesDocument(salesStrings);
+
 
         Scanner scanner = new Scanner(System.in);
         boolean isActive = true;
@@ -43,7 +53,8 @@ public class Main {
                         System.out.println("2.Check is document valid or not");
                         System.out.println("3.Save document in file");
                         System.out.println("4.Read order document with line");
-                        System.out.println("5.Back to general menu");
+                        System.out.println("5.Print order document whose customer name starts with the letter A");
+                        System.out.println("6.Back to general menu");
                         int a = scanner.nextInt();
                         switch (a) {
                             case 1:
@@ -63,6 +74,9 @@ public class Main {
                                 }
                                 break;
                             case 5:
+                                orderService.printOrderDocumentWhoseCustomerNameStartsWithTheLetterA(orders);
+                                break;
+                            case 6:
                                 active = false;
                                 break;
                             default:
@@ -71,14 +85,14 @@ public class Main {
                     }
                     break;
                 case 2:
-                    //boolean active1 = true;
                     while (active) {
                         System.out.println("Enter command number");
                         System.out.println("1.Create document");
                         System.out.println("2.Check is document valid or not");
                         System.out.println("3.Save document in file");
-                        System.out.println("4.Read order document with line");
-                        System.out.println("5.Back to general menu");
+                        System.out.println("4.Read return document with line");
+                        System.out.println("5.Print return document which expired day count is more 6");
+                        System.out.println("6.Back to general menu");
                         int a = scanner.nextInt();
                         switch (a) {
                             case 1:
@@ -98,6 +112,9 @@ public class Main {
                                 }
                                 break;
                             case 5:
+                                returnService.printReturnDocumentWhichExpiredDayCountIsMore6(returns);
+                                break;
+                            case 6:
                                 active = false;
                                 break;
                             default:
@@ -106,13 +123,15 @@ public class Main {
                     }
                     break;
                 case 3:
-                    while (isActive) {
+                    while (active) {
                         System.out.println("Enter command number");
                         System.out.println("1.Create document");
                         System.out.println("2.Check is document valid or not");
                         System.out.println("3.Save document in file");
-                        System.out.println("4.Read order document with line");
-                        System.out.println("5.Back to general menu");
+                        System.out.println("4.Read sales document with line");
+                        System.out.println("5.Sort order document by price and print info");
+                        System.out.println("6.Print sales  document which product price is less than 3");
+                        System.out.println("7.Back to general menu");
                         int a = scanner.nextInt();
                         switch (a) {
                             case 1:
@@ -131,6 +150,12 @@ public class Main {
                                 }
                                 break;
                             case 5:
+                                salesService.sortOrderDocumentByPriceAndPrintInfo(sales1);
+                                break;
+                            case 6:
+                                salesService.printSalesDocumentWhichProductPriceIsLessThan3(sales1);
+                                break;
+                            case 7:
                                 active = false;
                                 break;
                             default:

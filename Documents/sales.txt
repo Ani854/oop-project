@@ -1,2 +1,4 @@
-Mon May 03 12:21:36 AMT 2021,Arman,pasta,5.0,Artur
-Mon May 03 12:35:25 AMT 2021,Marat,dumplings,4.0,Gexam
+04.05.2021,Ani,egg,5.0,Sargis
+04.05.2021,Arman,cheese,10.0,Arman
+04.05.2021,Anush,chocolate,9.0,Suren
+04.05.2021,Ani,meat,28.0,Suren

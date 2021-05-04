@@ -8,6 +8,21 @@ public class Order extends BaseDocument {
     private String salesAgentName;
     private Date deliveryDate;
 
+    public void printOrderDocumentInfo() {
+        StringBuilder sb = new StringBuilder();
+        String doc = sb.append(getDate())
+                .append(",")
+                .append(getCustomerName())
+                .append(",")
+                .append(getProductName())
+                .append(",")
+                .append(getProductPrice())
+                .append(",")
+                .append(getSalesAgentName())
+                .append(",")
+                .append(getDeliveryDate()).toString();
+        System.out.println(doc);
+    }
 
     public String getSalesAgentName() {
         return salesAgentName;

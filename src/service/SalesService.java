@@ -5,6 +5,7 @@ import model.Order;
 import model.Sales;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class SalesService implements SaleBaseFunctionalities {
@@ -23,7 +24,7 @@ public class SalesService implements SaleBaseFunctionalities {
 
     @Override
     public boolean validate(BaseDocument document) throws Exception {
-        if (!(document instanceof Order)) {
+        if (!(document instanceof Sales)) {
             throw new Exception("This document is not an order document.");
         }
         BaseService.validate(document);
@@ -37,15 +38,48 @@ public class SalesService implements SaleBaseFunctionalities {
 
     @Override
     public String store(BaseDocument document) throws Exception {
-       if (!validate(document)){
-           throw new Exception("Document was not validated");
+        if (!validate(document)) {
+            throw new Exception("Document was not validated");
         }
         Sales sales = (Sales) document;
-        String doc = sales.getDate() + "," +
-                sales.getCustomerName() + "," +
-                sales.getProductName() + "," +
-                sales.getProductPrice() + "," +
-                sales.getVanAgentName();
+        StringBuilder sb = new StringBuilder();
+        String doc = sb.append(new SimpleDateFormat("dd.MM.yyyy").format(sales.getDate()))
+                .append(",")
+                .append(sales.getCustomerName())
+                .append(",")
+                .append(sales.getProductName())
+                .append(",")
+                .append(sales.getProductPrice())
+                .append(",")
+                .append(sales.getVanAgentName()).toString();
         return doc;
+    }
+
+    public void printSalesDocumentWhichProductPriceIsLessThan3(Sales[] sales) {
+        for (int i = 0; i < sales.length; i++) {
+            if (sales[i].getProductPrice() < 3) {
+                sales[i].printSalesDocumentInfo();
+            }
+        }
+    }
+
+    public void sortOrderDocumentByPriceAndPrintInfo(Sales[] sales) {
+        boolean isActive = true;
+        int count = 0;
+        while (isActive) {
+            isActive = false;
+            for (int i = 0; i < sales.length - 1 - count; i++) {
+                if (sales[i].getProductPrice() > sales[i + 1].getProductPrice()) {
+                    Sales temp = sales[i];
+                    sales[i] = sales[i + 1];
+                    sales[i + 1] = temp;
+                    isActive = true;
+                }
+            }
+            count++;
+        }
+        for (Sales sales1 : sales) {
+            sales1.printSalesDocumentInfo();
+        }
     }
 }

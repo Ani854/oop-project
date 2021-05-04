@@ -56,13 +56,32 @@ public class OrderService implements SaleBaseFunctionalities {
         if (!validate(document)) {
             throw new Exception("Document was not validated");
         }
+
         Order order = (Order) document;
-        String doc = order.getDate() + "," +
-                order.getCustomerName() + "," +
-                order.getProductName() + "," +
-                order.getProductPrice() + "," +
-                order.getSalesAgentName() + "," +
-                order.getDeliveryDate();
+        StringBuilder sb = new StringBuilder();
+        String doc = sb.append(new SimpleDateFormat("dd.MM.yyyy").format(order.getDate()))
+                .append(",")
+                .append(order.getCustomerName())
+                .append(",")
+                .append(order.getProductName())
+                .append(",")
+                .append(order.getProductPrice())
+                .append(",")
+                .append(order.getSalesAgentName())
+                .append(",")
+                .append(new SimpleDateFormat("dd.MM.yyyy").format(order.getDeliveryDate())).toString();
+
         return doc;
     }
+
+    public void printOrderDocumentWhoseCustomerNameStartsWithTheLetterA(Order[] orders) {
+        for (int i = 0; i < orders.length; i++) {
+            if (orders[i].getCustomerName().charAt(0) == 'A') {
+                orders[i].printOrderDocumentInfo();
+            }
+
+        }
+    }
+
+
 }

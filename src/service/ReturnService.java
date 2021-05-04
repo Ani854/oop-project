@@ -5,6 +5,7 @@ import model.Order;
 import model.Return;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class ReturnService implements SaleBaseFunctionalities {
@@ -30,7 +31,7 @@ public class ReturnService implements SaleBaseFunctionalities {
 
     @Override
     public boolean validate(BaseDocument document) throws Exception {
-        if (!(document instanceof Order)) {
+        if (!(document instanceof Return)) {
             throw new Exception("This document is not an order document.");
         }
         BaseService.validate(document);
@@ -50,12 +51,27 @@ public class ReturnService implements SaleBaseFunctionalities {
             throw new Exception("Document was not validated");
         }
         Return salesReturn = (Return) document;
-        String doc = salesReturn.getDate() + "," +
-                salesReturn.getCustomerName() + "," +
-                salesReturn.getProductName() + "," +
-                salesReturn.getProductPrice() + "," +
-                salesReturn.getVanAgent() + "," +
-                salesReturn.getExpiredDayCount();
+        StringBuilder sb = new StringBuilder();
+        String doc = sb.append(new SimpleDateFormat("dd.MM.yyyy").format(salesReturn.getDate()))
+                .append(",")
+                .append(salesReturn.getCustomerName())
+                .append(",")
+                .append(salesReturn.getProductName())
+                .append(",")
+                .append(salesReturn.getProductPrice())
+                .append(",")
+                .append(salesReturn.getVanAgent())
+                .append(",")
+                .append(salesReturn.getExpiredDayCount()).toString();
+
         return doc;
+    }
+
+    public void printReturnDocumentWhichExpiredDayCountIsMore6(Return[] returns) {
+        for (Return salesReturn : returns) {
+            if (salesReturn.getExpiredDayCount() > 6) {
+                salesReturn.printReturnDocumentInfo();
+            }
+        }
     }
 }

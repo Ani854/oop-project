@@ -1,2 +1,3 @@
-Sun May 02 22:42:42 AMT 2021,Arman,yogurt,2.0,Artur,5
-Mon May 03 12:34:55 AMT 2021,David,chocolate,1.0,Suren,6
+04.05.2021,Ani,egg,2.0,Sargis,8
+04.05.2021,Arman,cheese,2.0,Narek,8
+04.05.2021,Marat,chocolate,4.0,Suren,3
