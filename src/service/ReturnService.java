@@ -30,7 +30,7 @@ public class ReturnService implements SaleBaseFunctionalities {
     }
 
     @Override
-    public boolean validate(BaseDocument document) throws Exception {
+    public void validate(BaseDocument document) throws Exception {
         if (!(document instanceof Return)) {
             throw new Exception("This document is not an order document.");
         }
@@ -42,14 +42,11 @@ public class ReturnService implements SaleBaseFunctionalities {
             throw new NullPointerException("Expired Day Count  can not be negative.");
         }
         System.out.println("Everything is OK");
-        return true;
     }
 
     @Override
     public String store(BaseDocument document) throws Exception {
-        if (!validate(document)) {
-            throw new Exception("Document was not validated");
-        }
+        validate(document);
         Return salesReturn = (Return) document;
         StringBuilder sb = new StringBuilder();
         String doc = sb.append(new SimpleDateFormat("dd.MM.yyyy").format(salesReturn.getDate()))
@@ -67,7 +64,7 @@ public class ReturnService implements SaleBaseFunctionalities {
         return doc;
     }
 
-    public void printReturnDocumentWhichExpiredDayCountIsMore6(Return[] returns) {
+    public void printReturnDocumentByExpiredDay(Return[] returns) {
         for (Return salesReturn : returns) {
             if (salesReturn.getExpiredDayCount() > 6) {
                 salesReturn.printReturnDocumentInfo();

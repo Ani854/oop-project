@@ -23,7 +23,7 @@ public class SalesService implements SaleBaseFunctionalities {
     }
 
     @Override
-    public boolean validate(BaseDocument document) throws Exception {
+    public void validate(BaseDocument document) throws Exception {
         if (!(document instanceof Sales)) {
             throw new Exception("This document is not an order document.");
         }
@@ -32,15 +32,12 @@ public class SalesService implements SaleBaseFunctionalities {
             throw new NullPointerException("VanAgent  name is empty");
         }
         System.out.println("Everything is OK");
-        return true;
     }
 
 
     @Override
     public String store(BaseDocument document) throws Exception {
-        if (!validate(document)) {
-            throw new Exception("Document was not validated");
-        }
+        validate(document);
         Sales sales = (Sales) document;
         StringBuilder sb = new StringBuilder();
         String doc = sb.append(new SimpleDateFormat("dd.MM.yyyy").format(sales.getDate()))
@@ -55,7 +52,7 @@ public class SalesService implements SaleBaseFunctionalities {
         return doc;
     }
 
-    public void printSalesDocumentWhichProductPriceIsLessThan3(Sales[] sales) {
+    public void printSalesDocumentByProductPrice(Sales[] sales) {
         for (int i = 0; i < sales.length; i++) {
             if (sales[i].getProductPrice() < 3) {
                 sales[i].printSalesDocumentInfo();
@@ -63,7 +60,7 @@ public class SalesService implements SaleBaseFunctionalities {
         }
     }
 
-    public void sortOrderDocumentByPriceAndPrintInfo(Sales[] sales) {
+    public void sortOrderDocumentByPrice(Sales[] sales) {
         boolean isActive = true;
         int count = 0;
         while (isActive) {

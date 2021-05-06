@@ -33,7 +33,7 @@ public class OrderService implements SaleBaseFunctionalities {
     }
 
     @Override
-    public boolean validate(BaseDocument document) throws Exception {
+    public void validate(BaseDocument document) throws Exception {
         if (!(document instanceof Order)) {
             throw new Exception("This document is not an order document.");
         }
@@ -48,15 +48,11 @@ public class OrderService implements SaleBaseFunctionalities {
             throw new Exception("The date of the document is less than");
         }
         System.out.println("Everything is OK");
-        return true;
     }
 
     @Override
     public String store(BaseDocument document) throws Exception {
-        if (!validate(document)) {
-            throw new Exception("Document was not validated");
-        }
-
+        validate(document);
         Order order = (Order) document;
         StringBuilder sb = new StringBuilder();
         String doc = sb.append(new SimpleDateFormat("dd.MM.yyyy").format(order.getDate()))
@@ -74,7 +70,7 @@ public class OrderService implements SaleBaseFunctionalities {
         return doc;
     }
 
-    public void printOrderDocumentWhoseCustomerNameStartsWithTheLetterA(Order[] orders) {
+    public void printOrderDocumentByCustomerName(Order[] orders) {
         for (int i = 0; i < orders.length; i++) {
             if (orders[i].getCustomerName().charAt(0) == 'A') {
                 orders[i].printOrderDocumentInfo();

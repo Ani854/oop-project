@@ -74,7 +74,7 @@ public class Main {
                                 }
                                 break;
                             case 5:
-                                orderService.printOrderDocumentWhoseCustomerNameStartsWithTheLetterA(orders);
+                                orderService.printOrderDocumentByCustomerName(orders);
                                 break;
                             case 6:
                                 active = false;
@@ -112,7 +112,7 @@ public class Main {
                                 }
                                 break;
                             case 5:
-                                returnService.printReturnDocumentWhichExpiredDayCountIsMore6(returns);
+                                returnService.printReturnDocumentByExpiredDay(returns);
                                 break;
                             case 6:
                                 active = false;
@@ -150,10 +150,10 @@ public class Main {
                                 }
                                 break;
                             case 5:
-                                salesService.sortOrderDocumentByPriceAndPrintInfo(sales1);
+                                salesService.sortOrderDocumentByPrice(sales1);
                                 break;
                             case 6:
-                                salesService.printSalesDocumentWhichProductPriceIsLessThan3(sales1);
+                                salesService.printSalesDocumentByProductPrice(sales1);
                                 break;
                             case 7:
                                 active = false;
